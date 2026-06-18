@@ -1,4 +1,5 @@
 ---
-title: "Blog"
-description: "Research writing, technical notes, and field observations."
+title: "Notes"
+description: "Observations, experiments, and field notes."
+label: "lab notes"
 ---

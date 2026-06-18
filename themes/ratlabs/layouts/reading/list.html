@@ -2,11 +2,11 @@
 <div class="container">
 
   <header class="page-header">
-    <p class="page-header__label">library</p>
-    <h1 class="page-header__title">Reading</h1>
-    <p class="page-header__subtitle">
-      A curated bookshelf. Things we've read, are reading, or think you should read.
-    </p>
+    <p class="page-header__label">{{ .Params.label | default "library" }}</p>
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p class="page-header__subtitle">{{ . }}</p>
+    {{ end }}
   </header>
 
   {{/* Group reading items by category, using the configured category order */}}

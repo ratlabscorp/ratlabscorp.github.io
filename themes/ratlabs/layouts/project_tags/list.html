@@ -1,14 +1,13 @@
 {{ define "main" }}
 <div class="container">
 
-  {{/* Breadcrumb back to parent section */}}
   {{ $section := .Site.GetPage "/projects" }}
   <a href="{{ $section.RelPermalink }}" class="filter-reset">
     &larr; all projects
   </a>
 
   <header class="page-header" style="padding-top: 0;">
-    <p class="page-header__label">project_tags</p>
+    <p class="page-header__label">{{ .Data.Plural }}</p>
     <h1 class="page-header__title">{{ .Title }}</h1>
     <p class="page-header__subtitle">
       {{ len .Pages }} {{ if eq (len .Pages) 1 }}project{{ else }}projects{{ end }}
@@ -16,7 +15,6 @@
     </p>
   </header>
 
-  {{/* All other tags for cross-navigation */}}
   {{ $allTags := .Site.Taxonomies.project_tags }}
   {{ if $allTags }}
   <nav class="topic-filter" aria-label="Other project topics" style="margin-bottom: var(--space-8);">

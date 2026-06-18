@@ -1,58 +1,62 @@
 ---
 title: "Manifesto"
-description: "Why Rat Labs exists, what we believe, and what we mean by 'don't be a rat.'"
+description: "Why Rat Labs exists."
 ---
+Most rats run the maze.
 
+We wanted to know what happens when someone starts building new ones.
+
+That's Rat Labs.
 ## Why Rat Labs Exists
 
-Most research happens inside institutions: universities, companies, think tanks. These institutions have their uses. They also have their constraints. Grant cycles, publication politics, IP agreements, quarterly reviews, reputational risk management.
+Curiosity shouldn't require permission.
 
-We started Rat Labs because we wanted to do research without those constraints.
+Good questions are not reserved for universities, research labs, or companies with large budgets. They belong to anyone willing to do the work.
 
-Not because institutions are bad. Because we wanted to find out what research looks like when you remove the scaffolding.
+Rat Labs exists to explore difficult questions by building tools, running experiments, and sharing what we learn. We work independently not because institutions are wrong, but because independence lets curiosity set the agenda.
+
+Research is more than papers. Sometimes it's software. Sometimes it's a dataset. Sometimes it's a failed prototype that teaches you why the obvious solution didn't work.
+
+We wanted to see what research looks like when curiosity is the only constraint.
+
+## What We Believe
+
+**Curiosity over credentials.**
+
+The value of an idea isn't determined by who had it. Good work can come from anywhere.
+
+**Build the missing tool.**
+
+If a problem matters and the right tool doesn't exist, build it. Prototypes answer questions that discussions cannot.
+
+**Evidence over confidence.**
+
+Opinions are easy to produce. Evidence is harder to earn. We'd rather change our minds than defend a weak assumption.
+
+**Publish the work.**
+
+Share the methods, the limitations, and the failures. Knowledge becomes more useful when someone else can reproduce it, challenge it, or build on top of it.
+
+## Don't Be a Rat
+
+Following the crowd is easy.
+
+Waiting for permission is easy.
+
+Optimizing for approval is easy.
+
+Choosing curiosity over certainty isn't.
+
+Building instead of arguing isn't.
+
+Changing your mind when the evidence disagrees isn't.
+
+Don't be a rat.
 
 ---
 
-## Research Philosophy
+Everything you'll find here exists for one reason:
 
-We believe research is a practice, not a credential.
+**To understand something a little better than we did yesterday.**
 
-You don't need a PhD to ask good questions. You don't need a lab to run experiments. You don't need a journal to publish findings. What you need is rigor, honesty, and time.
-
-We prioritize:
-
-- **Understanding over output.** We'd rather spend three months deeply understanding a problem than produce a superficial paper on it.
-- **Reproducibility over novelty.** If we can't explain how we got there, we don't trust where we arrived.
-- **Long time horizons.** We are not optimizing for this quarter. We are not optimizing for this year.
-- **Honest uncertainty.** We say "we don't know" when we don't know.
-
----
-
-## Community Values
-
-Rat Labs is small by design. We are not trying to grow into an institution. We are trying to remain a place where people do good work together.
-
-We value:
-
-- Intellectual honesty above social comfort.
-- Craft over credential.
-- Depth over breadth.
-- Openness by default.
-
-We publish our work publicly whenever possible. We document our failures as carefully as our successes. We don't hide behind institutional authority, because we don't have any.
-
----
-
-## "Don't Be a Rat"
-
-The phrase has a specific meaning for us, distinct from the usual slang.
-
-In experimental contexts, a *rat* is a subject — something moved through a maze by external forces, responding to stimuli, optimizing for the next reward pellet. A rat in a maze doesn't ask who built the maze or why.
-
-We are trying to build the kind of research culture where people ask who built the maze.
-
-Don't optimize blindly. Don't follow incentive gradients without examining where they lead. Don't reproduce the maze because the maze exists.
-
-Think about what you're doing and why.
-
-That's what "don't be a rat" means to us.
+*Manifesto v1.0 · June 2026*

@@ -49,29 +49,17 @@ enableGitInfo = true
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "Projects"
+    name = "Work"
     url = "/projects/"
     weight = 2
   [[menu.main]]
-    name = "Blog"
+    name = "Notes"
     url = "/blog/"
     weight = 3
   [[menu.main]]
-    name = "Members"
-    url = "/members/"
-    weight = 4
-  [[menu.main]]
-    name = "Reading"
-    url = "/reading/"
-    weight = 5
-  [[menu.main]]
     name = "Manifesto"
     url = "/manifesto/"
-    weight = 6
-  [[menu.main]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 7
+    weight = 4
 
 # Site parameters
 [params]
@@ -79,7 +67,7 @@ enableGitInfo = true
   tagline = "Don't be a rat."
   author = "Rat Labs"
   github = "https://github.com/ratlabscorp"
-  email = "hello@ratlabs.org"
+  email = "rat.labs.m@gmail.com"
   # OpenGraph image
   ogImage = "/images/og-default.png"
   # Enable dark mode toggle

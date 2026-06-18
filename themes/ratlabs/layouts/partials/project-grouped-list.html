@@ -1,0 +1,30 @@
+{{/* Groups .Pages by Params.status and renders project-card partial for each */}}
+{{ $pages := .Pages }}
+{{ $statuses := slice }}
+{{ range $pages }}
+  {{ with .Params.status }}
+    {{ $statuses = $statuses | append . }}
+  {{ end }}
+{{ end }}
+{{ $statuses = $statuses | uniq }}
+
+{{ range $statuses }}
+{{ $group := where $pages "Params.status" . }}
+<section aria-labelledby="status-{{ . | urlize }}"{{ if ne . (index $statuses 0) }} style="margin-top: var(--space-12);"{{ end }}>
+  <p class="section-label" id="status-{{ . | urlize }}">{{ lower . }}</p>
+  <ul role="list" style="list-style: none; padding: 0;">
+    {{ range $group }}
+    <li class="project-card">{{ partial "project-card.html" . }}</li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ $nostatus := where $pages "Params.status" nil }}
+{{ if $nostatus }}
+<ul role="list" style="list-style: none; padding: 0; margin-top: var(--space-8);">
+  {{ range $nostatus }}
+  <li class="project-card">{{ partial "project-card.html" . }}</li>
+  {{ end }}
+</ul>
+{{ end }}

@@ -2,9 +2,11 @@
 <div class="container">
 
   <header class="page-header">
-    <p class="page-header__label">people</p>
-    <h1 class="page-header__title">Members</h1>
-    <p class="page-header__subtitle">The researchers behind Rat Labs.</p>
+    <p class="page-header__label">{{ .Params.label | default "people" }}</p>
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p class="page-header__subtitle">{{ . }}</p>
+    {{ end }}
   </header>
 
   <ul class="members-grid" role="list">

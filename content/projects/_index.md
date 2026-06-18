@@ -1,4 +1,5 @@
 ---
-title: "Projects"
-description: "Things we build, investigate, and ship."
+title: "Research"
+description: "What we built. Why. Evidence."
+label: "current research"
 ---

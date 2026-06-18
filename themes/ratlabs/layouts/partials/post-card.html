@@ -1,0 +1,20 @@
+{{/* partials/post-card.html — shared blog post card */}}
+<li class="card">
+  <div class="card__meta">
+    <time class="card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "02 Jan 2006" }}
+    </time>
+    {{ if .ReadingTime }}
+    <span class="card__reading-time">{{ .ReadingTime }} min read</span>
+    {{ end }}
+    {{ with .Params.series }}
+    <span class="tag">{{ . }}</span>
+    {{ end }}
+  </div>
+  <h2 class="card__title">
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </h2>
+  {{ with .Summary }}
+  <p class="card__excerpt">{{ . | plainify | truncate 120 }}</p>
+  {{ end }}
+</li>

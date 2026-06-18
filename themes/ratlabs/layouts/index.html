@@ -1,30 +1,30 @@
 {{ define "main" }}
 <div class="container">
 
+  {{ $projectsSection := .Site.GetPage "/projects" }}
+  {{ $blogSection := .Site.GetPage "/blog" }}
+  {{ $manifesto := .Site.GetPage "/manifesto" }}
+
   {{/* ── Hero ── */}}
   <section class="home-hero" aria-labelledby="hero-title">
-
-    {{/* "Rat Labs" — primary identity mark with signature three-rule motif */}}
     <h1 class="home-hero__name" id="hero-title">{{ .Site.Title }}</h1>
-
-    {{/* Tagline — the phrase */}}
     <p class="home-hero__tagline">&ldquo;{{ .Site.Params.tagline }}&rdquo;</p>
-
-    {{/* Supporting description */}}
-    <p class="home-hero__description">
-      Independent research in software, computing systems, and artificial intelligence.
+    {{ with .Params.identity }}
+    <p class="home-hero__identity">{{ . }}</p>
+    {{ end }}
+    <p class="home-hero__description">{{ .Params.description }}</p>
+    {{ with $manifesto }}
+    <p class="section-more" style="margin-top: var(--space-6);">
+      <a href="{{ .RelPermalink }}">Read the Manifesto &rarr;</a>
     </p>
-
-    {{ with .Content }}
-    <div class="home-hero__extra prose">{{ . }}</div>
     {{ end }}
   </section>
 
-  {{/* ── Featured Projects ── */}}
+  {{/* ── Research ── */}}
   {{ $projects := where site.RegularPages "Section" "projects" }}
   {{ if $projects }}
-  <section class="home-section" aria-labelledby="projects-heading">
-    <p class="section-label" id="projects-heading">projects</p>
+  <section class="home-section" aria-labelledby="research-heading">
+    <p class="section-label" id="research-heading">{{ with $projectsSection }}{{ .Params.label | default "research" }}{{ end }}</p>
     <ul class="project-cards-grid" role="list">
       {{ range first 4 $projects }}
       <li class="project-card project-card--boxed">
@@ -63,129 +63,44 @@
     </ul>
     {{ if gt (len $projects) 4 }}
     <p class="section-more">
-      <a href="{{ "/projects/" | relURL }}">All projects &rarr;</a>
+      <a href="{{ with $projectsSection }}{{ .RelPermalink }}{{ else }}{{ "/projects/" | relURL }}{{ end }}">All research &rarr;</a>
     </p>
     {{ end }}
   </section>
   {{ end }}
 
-  {{/* ── Latest Notes ── */}}
+  {{/* ── Lab Notes ── */}}
   {{ $posts := where site.RegularPages "Section" "blog" }}
   {{ if $posts }}
   <section class="home-section" aria-labelledby="notes-heading">
-    <p class="section-label" id="notes-heading">latest notes</p>
+    <p class="section-label" id="notes-heading">{{ with $blogSection }}{{ .Params.label | default "lab notes" }}{{ end }}</p>
     <ul class="card-list" role="list">
-      {{ range first 5 $posts }}
-      <li class="card">
-        <div class="card__meta">
-          <time class="card__date" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "02 Jan 2006" }}
-          </time>
-          {{ if .ReadingTime }}
-          <span class="card__reading-time">{{ .ReadingTime }} min read</span>
-          {{ end }}
-          {{ with .Params.series }}
-          <span class="tag">{{ . }}</span>
-          {{ end }}
-        </div>
-        <h2 class="card__title">
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </h2>
-        {{/* One-line excerpt: strip HTML, truncate at 120 chars for scannability */}}
-        {{ with .Summary }}
-        <p class="card__excerpt">{{ . | plainify | truncate 120 }}</p>
-        {{ end }}
-      </li>
+      {{ range first 3 $posts }}
+      {{ partial "post-card.html" . }}
       {{ end }}
     </ul>
-    {{ if gt (len $posts) 5 }}
+    {{ if gt (len $posts) 3 }}
     <p class="section-more">
-      <a href="{{ "/blog/" | relURL }}">All notes &rarr;</a>
+      <a href="{{ with $blogSection }}{{ .RelPermalink }}{{ else }}{{ "/blog/" | relURL }}{{ end }}">All notes &rarr;</a>
     </p>
     {{ end }}
   </section>
   {{ end }}
 
-  {{/* ── Manifesto Preview ── */}}
-  {{ $manifesto := .Site.GetPage "/manifesto" }}
-  {{ if $manifesto }}
-  <section class="home-section" aria-labelledby="manifesto-heading">
-    <p class="section-label" id="manifesto-heading">manifesto</p>
-    <blockquote class="home-manifesto__quote">
-      {{ $manifesto.Summary | plainify | truncate 280 }}
-    </blockquote>
-    <p class="section-more">
-      <a href="{{ $manifesto.Permalink }}">Read the manifesto &rarr;</a>
+  {{/* ── Collaborate ── */}}
+  <section class="home-section" aria-labelledby="involved-heading">
+    <p class="section-label" id="involved-heading">collaborate</p>
+    <p style="font-size: var(--text-md); color: var(--fg-muted); line-height: 1.65; max-width: 52ch; margin-bottom: var(--space-6);">
+      Rat Labs is growing into a community of curious builders and researchers.
     </p>
-  </section>
-  {{ end }}
-
-  {{/* ── Members ── */}}
-  {{ $members := where site.RegularPages "Section" "members" }}
-  {{ if $members }}
-  <section class="home-section" aria-labelledby="members-heading">
-    <p class="section-label" id="members-heading">members</p>
-    <ul class="members-grid" role="list">
-      {{ range $members }}
-      <li class="member-card">
-        <div class="member-card__avatar-wrap" aria-hidden="true">
-          {{ if .Params.avatar }}
-          <img src="{{ .Params.avatar | relURL }}" alt="" class="member-card__avatar">
-          {{ else }}
-          <span class="member-card__avatar member-card__avatar--initials">
-            {{ substr .Title 0 1 | upper }}
-          </span>
-          {{ end }}
-        </div>
-        <div class="member-card__body">
-          <h2 class="member-card__name">
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h2>
-          {{ with .Params.bio }}
-          <p class="member-card__bio">{{ . }}</p>
-          {{ end }}
-          {{ with .Params.interests }}
-          <ul class="member-card__interests" role="list" aria-label="Areas of interest">
-            {{ range . }}
-            <li><span class="tag">{{ . }}</span></li>
-            {{ end }}
-          </ul>
-          {{ end }}
-          {{ with .Params.links }}
-          <ul class="member-card__links" role="list">
-            {{ range . }}
-            <li>
-              <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
-                {{ .label }}
-              </a>
-            </li>
-            {{ end }}
-          </ul>
-          {{ end }}
-        </div>
-      </li>
-      {{ end }}
-    </ul>
-  </section>
-  {{ end }}
-
-  {{/* ── Contact ── */}}
-  <section class="home-section" aria-labelledby="contact-heading">
-    <p class="section-label" id="contact-heading">contact</p>
-    <ul class="contact-links" role="list">
-      {{ with .Site.Params.email }}
-      <li class="contact-item">
-        <span class="contact-item__label">email</span>
-        <a href="mailto:{{ . }}" class="contact-item__link">{{ . }}</a>
-      </li>
-      {{ end }}
-      {{ with .Site.Params.github }}
-      <li class="contact-item">
-        <span class="contact-item__label">github</span>
-        <a href="{{ . }}" class="contact-item__link" rel="noopener noreferrer" target="_blank">{{ . }}</a>
-      </li>
-      {{ end }}
-    </ul>
+    <p style="font-size: var(--text-base); color: var(--fg-muted); line-height: 1.75; max-width: 52ch; margin-bottom: var(--space-6);">
+      You don't need a PhD.<br>
+      You don't need permission.<br>
+      You need curiosity.
+    </p>
+    <p class="section-more">
+      <a href="mailto:{{ .Site.Params.email }}">Get in touch &rarr;</a>
+    </p>
   </section>
 
 </div>

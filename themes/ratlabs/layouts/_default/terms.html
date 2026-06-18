@@ -1,8 +1,9 @@
 {{ define "main" }}
 <div class="container">
-  {{/* Breadcrumb back to all posts */}}
-  <a href="{{ "/blog/" | relURL }}" class="filter-reset">
-    &larr; all posts
+  {{/* Breadcrumb back to parent section */}}
+  {{ $section := .Site.GetPage "/blog" }}
+  <a href="{{ $section.RelPermalink }}" class="filter-reset">
+    &larr; all {{ $section.Params.label | default "posts" }}
   </a>
 
   <header class="page-header" style="padding-top: 0;">

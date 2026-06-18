@@ -1,5 +1,5 @@
 ---
 title: "Home"
+description: "Rat Labs is an independent research collective exploring software, computing systems, and artificial intelligence through experiments, open-source software, and published research."
+identity: "Between builders and researchers."
 ---
-
-Rat Labs is an independent research collective focused on the intersection of software systems, programming language theory, and machine intelligence. We are not affiliated with any university or corporation. We publish our findings openly.
