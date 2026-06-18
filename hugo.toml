@@ -1,0 +1,49 @@
+baseURL = "https://ratlabscorp.github.io/"
+title = "RatLabsCorp"
+theme = "hugo-foxx"
+paginate = 10
+enableRobotsTXT = true
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  author = "author"
+
+[params]
+  description = "Independent research collective. Curiosity-driven. Skepticism-fueled."
+  enableAppearance = true
+
+  [params.logo]
+    logoMark = "/logo.png"
+    logoType = false
+
+  [params.author]
+    name = "RatLabsCorp"
+
+  [params.style]
+    [params.style.dark]
+      ac = "#d4a574"
+      bg = "#0d1117"
+      fg = "#c9d1d9"
+    [params.style.light]
+      ac = "#8b5e14"
+      bg = "#f6f3ee"
+      fg = "#1a1a1a"
+
+  [params.posts]
+    disableCard = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [["$$", "$$"]]
+          inline = [["$", "$"]]
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

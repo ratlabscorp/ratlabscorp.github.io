@@ -1,0 +1,46 @@
+{{- define "main" }}
+    <!-- Hero / Intro section at the top -->
+    <section id="hero-section" class="hero-intro">
+        {{- with .Content }}
+            <div class="content hero-content-wrapper">
+                {{ . }}
+            </div>
+        {{- end }}
+    </section>
+
+    <!-- Recent blog posts listing (rendered dynamically if posts exist) -->
+    {{- $posts := where site.RegularPages "Section" "blog" }}
+    {{- if $posts }}
+        <hr class="section-divider">
+        <section id="latest-posts" class="home-section">
+            <h2>Latest Logs</h2>
+            <ul class="post-list">
+                {{- range first 5 $posts }}
+                <li>
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </li>
+                {{- end }}
+            </ul>
+        </section>
+    {{- end }}
+
+    <!-- Recent projects listing (rendered dynamically if projects exist) -->
+    {{- $projects := where site.RegularPages "Section" "projects" }}
+    {{- if $projects }}
+        <hr class="section-divider">
+        <section id="latest-projects" class="home-section">
+            <h2>Recent Projects</h2>
+            <ul class="project-list">
+                {{- range first 5 $projects }}
+                <li>
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    {{- if .Description }}
+                    <span class="project-desc">— {{ .Description }}</span>
+                    {{- end }}
+                </li>
+                {{- end }}
+            </ul>
+        </section>
+    {{- end }}
+{{- end }}
