@@ -1,7 +1,12 @@
 {{ define "main" }}
 <div class="container">
 
-  <header class="page-header">
+  {{/* Breadcrumb back to all posts */}}
+  <a href="{{ "/blog/" | relURL }}" class="filter-reset">
+    &larr; all posts
+  </a>
+
+  <header class="page-header" style="padding-top: 0;">
     <p class="page-header__label">{{ .Data.Plural }}</p>
     <h1 class="page-header__title">{{ .Title }}</h1>
     <p class="page-header__subtitle">
@@ -9,6 +14,24 @@
       <em>{{ .Title }}</em>.
     </p>
   </header>
+
+  {{/* All other tags for cross-navigation */}}
+  {{ $allTags := .Site.Taxonomies.tags }}
+  {{ if $allTags }}
+  <nav class="topic-filter" aria-label="Other tags" style="margin-bottom: var(--space-8);">
+    <ul class="topic-filter__list" role="list">
+      {{ range $name, $pages := $allTags }}
+      <li>
+        <a href="{{ "/tags/" | relURL }}{{ $name | urlize }}/"
+           class="topic-filter__tag{{ if eq $name ($.Title | lower | urlize) }} topic-filter__tag--active{{ end }}">
+          {{ $name }}
+          <span class="topic-filter__count">({{ len $pages }})</span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+  {{ end }}
 
   <ul class="card-list" role="list">
     {{ range .Pages }}

@@ -1,7 +1,11 @@
 {{ define "main" }}
 <div class="container">
+  {{/* Breadcrumb back to all projects */}}
+  <a href="{{ "/projects/" | relURL }}" class="filter-reset">
+    &larr; all projects
+  </a>
 
-  <header class="page-header">
+  <header class="page-header" style="padding-top: 0;">
     <p class="page-header__label">project topics</p>
     <h1 class="page-header__title">Project Tags</h1>
     <p class="page-header__subtitle">Browse projects by topic.</p>
@@ -13,7 +17,7 @@
       <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
          class="topic-filter__tag">
         {{ $name }}
-        <span class="topic-filter__count">{{ len $pages }}</span>
+        <span class="topic-filter__count">({{ len $pages }})</span>
       </a>
     </li>
     {{ end }}

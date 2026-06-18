@@ -2,11 +2,9 @@
 <div class="container">
 
   {{/* Breadcrumb back to all projects */}}
-  <p style="font-family: var(--font-mono); font-size: var(--text-xs); margin-bottom: var(--space-8);">
-    <a href="{{ "/projects/" | relURL }}" style="color: var(--fg-faint); text-decoration: none;">
-      &larr; all projects
-    </a>
-  </p>
+  <a href="{{ "/projects/" | relURL }}" class="filter-reset">
+    &larr; all projects
+  </a>
 
   <header class="page-header" style="padding-top: 0;">
     <p class="page-header__label">project_tags</p>
@@ -27,7 +25,7 @@
         <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
            class="topic-filter__tag{{ if eq $name ($.Title | lower | urlize) }} topic-filter__tag--active{{ end }}">
           {{ $name }}
-          <span class="topic-filter__count">{{ len $pages }}</span>
+          <span class="topic-filter__count">({{ len $pages }})</span>
         </a>
       </li>
       {{ end }}

@@ -17,7 +17,7 @@
       <li>
         <a href="{{ "/tags/" | relURL }}{{ $name | urlize }}/" class="topic-filter__tag">
           {{ $name }}
-          <span class="topic-filter__count">{{ len $pages }}</span>
+          <span class="topic-filter__count">({{ len $pages }})</span>
         </a>
       </li>
       {{ end }}

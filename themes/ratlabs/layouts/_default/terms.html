@@ -1,7 +1,11 @@
 {{ define "main" }}
 <div class="container">
+  {{/* Breadcrumb back to all posts */}}
+  <a href="{{ "/blog/" | relURL }}" class="filter-reset">
+    &larr; all posts
+  </a>
 
-  <header class="page-header">
+  <header class="page-header" style="padding-top: 0;">
     <p class="page-header__label">{{ .Data.Plural }}</p>
     <h1 class="page-header__title">{{ .Title | title }}</h1>
   </header>
@@ -11,7 +15,7 @@
     <li>
       <a href="{{ .Page.Permalink }}" class="topic-filter__tag">
         {{ .Page.Title }}
-        <span class="topic-filter__count">{{ .Count }}</span>
+        <span class="topic-filter__count">({{ .Count }})</span>
       </a>
     </li>
     {{ end }}
