@@ -1,22 +1,31 @@
 {{ define "main" }}
 <div class="container">
 
-  <header class="page-header">
-    <p class="page-header__label">work</p>
-    <h1 class="page-header__title">Projects</h1>
-    <p class="page-header__subtitle">Things we build, investigate, and ship.</p>
+  {{/* Breadcrumb back to all projects */}}
+  <p style="font-family: var(--font-mono); font-size: var(--text-xs); margin-bottom: var(--space-8);">
+    <a href="{{ "/projects/" | relURL }}" style="color: var(--fg-faint); text-decoration: none;">
+      &larr; all projects
+    </a>
+  </p>
+
+  <header class="page-header" style="padding-top: 0;">
+    <p class="page-header__label">project_tags</p>
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    <p class="page-header__subtitle">
+      {{ len .Pages }} {{ if eq (len .Pages) 1 }}project{{ else }}projects{{ end }}
+      tagged <em>{{ .Title }}</em>.
+    </p>
   </header>
 
-  {{/* ── Tag filter pills ── */}}
+  {{/* All other tags for cross-navigation */}}
   {{ $allTags := .Site.Taxonomies.project_tags }}
   {{ if $allTags }}
-  <nav class="project-filter" aria-label="Filter projects by topic">
-    <p class="project-filter__label">filter by topic</p>
+  <nav class="project-filter" aria-label="Other project topics" style="margin-bottom: var(--space-8);">
     <ul class="project-filter__list" role="list">
       {{ range $name, $pages := $allTags }}
       <li>
         <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
-           class="project-filter__tag">
+           class="project-filter__tag{{ if eq $name ($.Title | lower | urlize) }} project-filter__tag--active{{ end }}">
           {{ $name }}
           <span class="project-filter__count">{{ len $pages }}</span>
         </a>
@@ -26,14 +35,13 @@
   </nav>
   {{ end }}
 
-  {{/* Group by status */}}
+  {{/* Project cards grouped by status */}}
   {{ $active   := where .Pages "Params.status" "Active" }}
   {{ $paused   := where .Pages "Params.status" "Paused" }}
   {{ $archived := where .Pages "Params.status" "Archived" }}
-  {{ $nostatus := where .Pages "Params.status" nil }}
 
   {{ if $active }}
-  <section aria-labelledby="active-heading" style="margin-top: var(--space-12);">
+  <section aria-labelledby="active-heading">
     <p class="section-label" id="active-heading">active</p>
     <ul role="list" style="list-style: none; padding: 0;">
       {{ range $active }}
@@ -44,7 +52,7 @@
   {{ end }}
 
   {{ if $paused }}
-  <section aria-labelledby="paused-heading" style="margin-top: var(--space-12);">
+  <section aria-labelledby="paused-heading" style="margin-top: var(--space-8);">
     <p class="section-label" id="paused-heading">paused</p>
     <ul role="list" style="list-style: none; padding: 0;">
       {{ range $paused }}
@@ -55,7 +63,7 @@
   {{ end }}
 
   {{ if $archived }}
-  <section aria-labelledby="archived-heading" style="margin-top: var(--space-12);">
+  <section aria-labelledby="archived-heading" style="margin-top: var(--space-8);">
     <p class="section-label" id="archived-heading">archived</p>
     <ul role="list" style="list-style: none; padding: 0;">
       {{ range $archived }}
@@ -65,6 +73,8 @@
   </section>
   {{ end }}
 
+  {{/* Any without status */}}
+  {{ $nostatus := where .Pages "Params.status" nil }}
   {{ if $nostatus }}
   <ul role="list" style="list-style: none; padding: 0; margin-top: var(--space-8);">
     {{ range $nostatus }}

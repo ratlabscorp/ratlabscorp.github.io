@@ -16,6 +16,15 @@
     {{ delimit . " · " }}
   </span>
   {{ end }}
+  {{ with .Params.project_tags }}
+  <ul class="project-card__tags" role="list">
+    {{ range . }}
+    <li>
+      <a href="{{ "/project_tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
   {{ with .Params.links }}
   <ul class="project-card__links" role="list">
     {{ range . }}

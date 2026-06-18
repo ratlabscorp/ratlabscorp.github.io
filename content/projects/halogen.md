@@ -3,6 +3,10 @@ title: "Halogen"
 date: 2024-06-01
 description: "An experimental purely-functional intermediate representation for compilers, designed to make optimization passes composable and verifiable."
 status: "Paused"
+project_tags:
+  - "compilers"
+  - "research"
+  - "programming-languages"
 contributors:
   - "vn"
 links:

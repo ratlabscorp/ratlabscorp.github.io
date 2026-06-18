@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container">
+
+  <header class="page-header">
+    <p class="page-header__label">project topics</p>
+    <h1 class="page-header__title">Project Tags</h1>
+    <p class="page-header__subtitle">Browse projects by topic.</p>
+  </header>
+
+  <ul class="project-filter__list" role="list" style="margin-top: var(--space-8);">
+    {{ range $name, $pages := .Site.Taxonomies.project_tags }}
+    <li>
+      <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
+         class="project-filter__tag">
+        {{ $name }}
+        <span class="project-filter__count">{{ len $pages }}</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+
+</div>
+{{ end }}

@@ -3,6 +3,10 @@ title: "Ferret"
 date: 2025-11-01
 description: "A minimal, dependency-free tracing runtime for concurrent Go programs. Designed for production debugging without instrumentation overhead."
 status: "Active"
+project_tags:
+  - "systems"
+  - "go"
+  - "observability"
 contributors:
   - "mx"
   - "tz"

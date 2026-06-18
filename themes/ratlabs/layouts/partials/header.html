@@ -1,11 +1,20 @@
 <header class="site-header" role="banner">
   <div class="header-inner">
 
-    {{/* Wordmark */}}
-    <a href="{{ "/" | relURL }}" class="site-wordmark" aria-label="{{ .Site.Title }} home">
-      <span class="site-wordmark__name">{{ .Site.Title }}</span>
-      <span class="site-wordmark__glyph" aria-hidden="true">// research</span>
-    </a>
+    {{/* ── Left cluster: Logo + Signature phrase ── */}}
+    <div class="header-left">
+      <a href="{{ "/" | relURL }}" class="site-logo" aria-label="{{ .Site.Title }} home">
+        <img src="{{ "/logo.png" | relURL }}" alt="{{ .Site.Title }}" class="site-logo__img">
+      </a>
+
+      {{/* "Don't be a rat." — site's signature phrase, links to manifesto */}}
+      {{ $manifesto := .Site.GetPage "/manifesto" }}
+      {{ if $manifesto }}
+      <a href="{{ $manifesto.Permalink }}" class="site-tagline" title="Read the manifesto">
+        &ldquo;{{ .Site.Params.tagline }}&rdquo;
+      </a>
+      {{ end }}
+    </div>
 
     {{/* Mobile hamburger */}}
     <button class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation">
@@ -14,26 +23,44 @@
       <span class="nav-toggle__bar" aria-hidden="true"></span>
     </button>
 
-    {{/* Main navigation */}}
-    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-      <ul class="site-nav__list" role="list">
-        {{ range .Site.Menus.main }}
-        <li class="site-nav__item">
-          <a href="{{ .URL | relURL }}"
-             {{ if eq $.RelPermalink (.URL | relURL) }}class="active" aria-current="page"{{ end }}>
-            {{ .Name }}
-          </a>
-        </li>
-        {{ end }}
-      </ul>
-    </nav>
+    {{/* ── Right cluster: Main navigation + theme toggle ── */}}
+    <div class="header-right">
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="site-nav__list" role="list">
+          {{ range .Site.Menus.main }}
+          {{/* Manifesto is accessible via the signature phrase — exclude from main nav */}}
+          {{ if ne .Name "Manifesto" }}
+          <li class="site-nav__item">
+            <a href="{{ .URL | relURL }}"
+               {{ if eq $.RelPermalink (.URL | relURL) }}class="active" aria-current="page"{{ end }}>
+              {{ .Name | lower }}
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
+      </nav>
 
-    {{/* Dark mode toggle */}}
-    {{ if .Site.Params.darkMode }}
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <span class="theme-toggle__icon" aria-hidden="true">dark</span>
-    </button>
-    {{ end }}
+      {{/* Dark mode toggle — Sun / Moon SVG */}}
+      {{ if .Site.Params.darkMode }}
+      <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Toggle dark mode">
+        <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+          <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+          <line x1="2" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+          <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+        </svg>
+        <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      {{ end }}
+    </div>
 
   </div>
 </header>

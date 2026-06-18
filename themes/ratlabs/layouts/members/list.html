@@ -10,28 +10,42 @@
   <ul class="members-grid" role="list">
     {{ range .Pages }}
     <li class="member-card">
-      <h2 class="member-card__name">{{ .Title }}</h2>
-      {{ with .Params.bio }}
-      <p class="member-card__bio">{{ . }}</p>
-      {{ end }}
-      {{ with .Params.interests }}
-      <ul class="member-card__interests" role="list" aria-label="Areas of interest">
-        {{ range . }}
-        <li><span class="tag">{{ . }}</span></li>
+      {{/* Avatar — overflowing circle at top-right */}}
+      <div class="member-card__avatar-wrap" aria-hidden="true">
+        {{ if .Params.avatar }}
+        <img src="{{ .Params.avatar | relURL }}" alt="" class="member-card__avatar">
+        {{ else }}
+        <span class="member-card__avatar member-card__avatar--initials">
+          {{ substr .Title 0 1 | upper }}
+        </span>
         {{ end }}
-      </ul>
-      {{ end }}
-      {{ with .Params.links }}
-      <ul class="member-card__links" role="list">
-        {{ range . }}
-        <li>
-          <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
-            {{ .label }}
-          </a>
-        </li>
+      </div>
+      <div class="member-card__body">
+        <h2 class="member-card__name">
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h2>
+        {{ with .Params.bio }}
+        <p class="member-card__bio">{{ . }}</p>
         {{ end }}
-      </ul>
-      {{ end }}
+        {{ with .Params.interests }}
+        <ul class="member-card__interests" role="list" aria-label="Areas of interest">
+          {{ range . }}
+          <li><span class="tag">{{ . }}</span></li>
+          {{ end }}
+        </ul>
+        {{ end }}
+        {{ with .Params.links }}
+        <ul class="member-card__links" role="list">
+          {{ range . }}
+          <li>
+            <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
+              {{ .label }}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
     </li>
     {{ end }}
   </ul>

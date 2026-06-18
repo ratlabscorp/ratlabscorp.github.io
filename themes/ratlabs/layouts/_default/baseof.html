@@ -94,15 +94,17 @@
       function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('rl-theme', theme);
-        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-        toggle.querySelector('.theme-toggle__icon').textContent = theme === 'dark' ? 'light' : 'dark';
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+        );
       }
 
       toggle.addEventListener('click', function() {
         setTheme(getTheme() === 'dark' ? 'light' : 'dark');
       });
 
-      // Initialize label
+      // Sync aria-label on page load
       setTheme(getTheme());
     })();
   </script>

@@ -33,6 +33,7 @@ enableGitInfo = true
   tag = "tags"
   category = "categories"
   series = "series"
+  project_tag = "project_tags"
 
 # Output formats — RSS + HTML for all sections
 [outputs]

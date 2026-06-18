@@ -4,6 +4,7 @@ date: {{ .Date }}
 draft: true
 description: ""
 status: "Active"   # Active | Paused | Archived
+project_tags: []   # e.g. ["systems", "ai", "compilers", "research"]
 contributors: []
 links:
   - label: "GitHub"
