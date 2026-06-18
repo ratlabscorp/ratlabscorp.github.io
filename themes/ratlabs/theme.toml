@@ -1,0 +1,12 @@
+name = "Rat Labs"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A minimal, content-first Hugo theme for Rat Labs — independent research collective."
+homepage = "https://ratlabscorp.github.io"
+tags = ["research", "minimal", "academic", "blog", "documentation"]
+features = ["blog", "projects", "members", "reading", "dark mode", "syntax highlighting", "RSS"]
+min_version = "0.110.0"
+
+[author]
+  name = "Rat Labs"
+  homepage = "https://ratlabscorp.github.io"

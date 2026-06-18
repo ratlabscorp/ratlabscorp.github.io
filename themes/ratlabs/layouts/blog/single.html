@@ -1,0 +1,117 @@
+{{ define "main" }}
+
+{{/* Determine if this post has a ToC and is long enough to warrant one */}}
+{{ $hasToc := and .Params.toc (gt (len .TableOfContents) 100) }}
+
+{{ if $hasToc }}
+<div class="post-layout">
+  <article aria-labelledby="post-title">
+{{ else }}
+<div class="container">
+  <article aria-labelledby="post-title">
+{{ end }}
+
+    {{/* Post header */}}
+    <header class="post-header">
+      <div class="post-header__meta">
+        <time class="post-header__date" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "02 Jan 2006" }}
+        </time>
+        {{ if .ReadingTime }}
+        <span class="post-header__reading-time">{{ .ReadingTime }} min read</span>
+        {{ end }}
+        {{ with .Params.series }}
+        <span class="tag tag--accent">{{ . }}</span>
+        {{ end }}
+      </div>
+
+      <h1 class="post-header__title" id="post-title">{{ .Title }}</h1>
+
+      {{ with .Params.tags }}
+      <ul class="post-header__tags" role="list" aria-label="Tags">
+        {{ range . }}
+        <li><a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+
+      {{ with .Params.categories }}
+      <ul class="post-header__tags" role="list" aria-label="Categories">
+        {{ range . }}
+        <li><a href="{{ "/categories/" | relURL }}{{ . | urlize }}/" class="tag tag--accent">{{ . }}</a></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </header>
+
+    {{/* Series navigation */}}
+    {{ with .Params.series }}
+    {{ $seriesName := . }}
+    {{ $seriesPages := where site.RegularPages "Params.series" $seriesName }}
+    {{ if gt (len $seriesPages) 1 }}
+    <aside class="post-series" aria-label="Series navigation">
+      <p class="post-series__label">series</p>
+      <p class="post-series__title">{{ $seriesName }}</p>
+      <ol style="margin-top: 0.75rem; padding-left: 1.2em; font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1.8; color: var(--fg-muted);">
+        {{ range $seriesPages }}
+        <li {{ if eq .Permalink $.Permalink }}style="color: var(--fg); font-weight: 600;"{{ end }}>
+          <a href="{{ .Permalink }}" style="{{ if eq .Permalink $.Permalink }}color: var(--fg);{{ else }}color: var(--accent);{{ end }} text-decoration: none;">
+            {{ .Title }}
+          </a>
+        </li>
+        {{ end }}
+      </ol>
+    </aside>
+    {{ end }}
+    {{ end }}
+
+    {{/* Post body */}}
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    {{/* Post footer — tags & nav */}}
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+      {{ with .Params.tags }}
+      <div style="margin-bottom: 0.75rem;">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); margin-right: 0.5rem; letter-spacing: 0.06em;">tags:</span>
+        {{ range . }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag" style="margin-right: 0.25rem;">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      {{ with .Params.categories }}
+      <div style="margin-bottom: 1rem;">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); margin-right: 0.5rem; letter-spacing: 0.06em;">categories:</span>
+        {{ range . }}
+        <a href="{{ "/categories/" | relURL }}{{ . | urlize }}/" class="tag tag--accent" style="margin-right: 0.25rem;">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <nav aria-label="Post navigation" style="display: flex; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: var(--text-xs);">
+        {{ with .PrevInSection }}
+        <a href="{{ .Permalink }}" style="color: var(--accent); text-decoration: none;">&larr; {{ .Title }}</a>
+        {{ end }}
+        {{ with .NextInSection }}
+        <a href="{{ .Permalink }}" style="color: var(--accent); text-decoration: none; margin-left: auto;">{{ .Title }} &rarr;</a>
+        {{ end }}
+      </nav>
+    </footer>
+
+  </article>
+
+  {{/* Table of Contents sidebar (shown on large screens) */}}
+  {{ if $hasToc }}
+  <aside aria-label="Table of contents">
+    <div class="toc">
+      <p class="toc__title">contents</p>
+      <nav>{{ .TableOfContents }}</nav>
+    </div>
+  </aside>
+  {{ end }}
+
+</div>
+
+{{ end }}

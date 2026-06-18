@@ -1,0 +1,76 @@
+{{ define "main" }}
+<div class="container">
+
+  <article aria-labelledby="reading-title">
+
+    {{/* Citation-style header */}}
+    <header class="page-header" style="padding-bottom: var(--space-6);">
+
+      {{/* Eyebrow label */}}
+      <p class="page-header__label">
+        {{ with .Params.category }}{{ . }}{{ else }}reading{{ end }}
+      </p>
+
+      {{/* Title — treat like a book/paper title: display serif, no bold */}}
+      <h1 class="post-header__title" id="reading-title" style="font-style: italic; font-weight: 400;">
+        &ldquo;{{ .Title }}&rdquo;
+      </h1>
+
+      {{/* Author */}}
+      {{ with .Params.author }}
+      <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg-muted); margin-top: var(--space-3); letter-spacing: 0.02em;">
+        {{ . }}
+      </p>
+      {{ end }}
+
+      {{/* Status + external link */}}
+      <div style="display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
+        {{ with .Params.status }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+        {{ with .Params.link }}
+        <a href="{{ . }}" class="tag tag--accent" rel="noopener noreferrer" target="_blank">
+          View source ↗
+        </a>
+        {{ end }}
+      </div>
+
+    </header>
+
+    {{/* Researcher's notes — the markdown body */}}
+    {{ with .Content }}
+    <section aria-labelledby="notes-label" style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border);">
+      <p class="section-label" id="notes-label">notes</p>
+      <div class="prose">{{ . }}</div>
+    </section>
+    {{ else }}
+    {{/* If no notes yet, show the frontmatter note field */}}
+    {{ with .Params.note }}
+    <section style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border);">
+      <p class="section-label">notes</p>
+      <blockquote style="font-family: var(--font-display); font-style: italic; color: var(--fg-muted); border-left: 3px solid var(--border-focus); padding-left: 1.5rem; margin: 0;">
+        {{ . }}
+      </blockquote>
+    </section>
+    {{ end }}
+    {{ end }}
+
+  </article>
+
+  {{/* Prev/next reading items */}}
+  <nav aria-label="Reading navigation" style="margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: var(--text-xs);">
+    {{ with .PrevInSection }}
+    <a href="{{ .Permalink }}" style="color: var(--accent); text-decoration: none;">&larr; {{ .Title }}</a>
+    {{ end }}
+    {{ with .NextInSection }}
+    <a href="{{ .Permalink }}" style="color: var(--accent); text-decoration: none; margin-left: auto;">{{ .Title }} &rarr;</a>
+    {{ end }}
+  </nav>
+
+  {{/* Back to bookshelf */}}
+  <p style="margin-top: var(--space-6); font-family: var(--font-mono); font-size: var(--text-xs);">
+    <a href="{{ "/reading/" | relURL }}" style="color: var(--accent); text-decoration: underline;">&larr; Back to reading list</a>
+  </p>
+
+</div>
+{{ end }}

@@ -1,0 +1,81 @@
+{{ define "main" }}
+<div class="container">
+
+  <article aria-labelledby="member-name">
+
+    <header class="page-header">
+      <p class="page-header__label">member</p>
+      <h1 class="page-header__title" id="member-name">{{ .Title }}</h1>
+    </header>
+
+    {{/* Member bio */}}
+    {{ with .Params.bio }}
+    <p style="font-size: var(--text-md); color: var(--fg-muted); line-height: 1.7; max-width: 58ch; margin-bottom: var(--space-8);">{{ . }}</p>
+    {{ end }}
+
+    {{/* Interests */}}
+    {{ with .Params.interests }}
+    <section aria-labelledby="interests-heading" style="margin-bottom: var(--space-8);">
+      <p class="section-label" id="interests-heading">interests</p>
+      <ul class="member-card__interests" role="list" style="margin-top: 0;">
+        {{ range . }}
+        <li><span class="tag">{{ . }}</span></li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* Links */}}
+    {{ with .Params.links }}
+    <section aria-labelledby="links-heading" style="margin-bottom: var(--space-8);">
+      <p class="section-label" id="links-heading">links</p>
+      <ul class="contact-links" role="list">
+        {{ range . }}
+        <li class="contact-item">
+          <span class="contact-item__label" style="min-width: 5em;">{{ .label }}</span>
+          <a href="{{ .url }}" class="contact-item__link" rel="noopener noreferrer" target="_blank">{{ .url }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* Extended bio / CV content from markdown body */}}
+    {{ with .Content }}
+    <section aria-labelledby="extended-bio-heading" style="margin-top: var(--space-12); padding-top: var(--space-8); border-top: 1px solid var(--border);">
+      <p class="section-label" id="extended-bio-heading">notes</p>
+      <div class="prose">{{ . }}</div>
+    </section>
+    {{ end }}
+
+    {{/* Posts authored by this member (if posts have a matching author/contributor) */}}
+    {{ $handle := .Title }}
+    {{ $posts := where (where site.RegularPages "Section" "blog") "Params.contributors" "intersect" (slice $handle) }}
+    {{ if not $posts }}
+      {{ $posts = where (where site.RegularPages "Section" "blog") "Params.author" $handle }}
+    {{ end }}
+    {{ if $posts }}
+    <aside aria-labelledby="member-posts-heading" style="margin-top: var(--space-12); padding-top: var(--space-8); border-top: 1px solid var(--border);">
+      <p class="section-label" id="member-posts-heading">notes by {{ $handle }}</p>
+      <ul class="card-list" role="list">
+        {{ range $posts }}
+        <li class="card">
+          <time class="card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+          <h3 class="card__title" style="font-size: var(--text-base);">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h3>
+        </li>
+        {{ end }}
+      </ul>
+    </aside>
+    {{ end }}
+
+  </article>
+
+  {{/* Back link */}}
+  <p style="margin-top: var(--space-12); font-family: var(--font-mono); font-size: var(--text-xs);">
+    <a href="{{ "/members/" | relURL }}" style="color: var(--accent); text-decoration: underline;">&larr; All members</a>
+  </p>
+
+</div>
+{{ end }}

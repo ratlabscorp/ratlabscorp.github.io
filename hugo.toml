@@ -1,49 +1,96 @@
 baseURL = "https://ratlabscorp.github.io/"
-title = "RatLabsCorp"
-theme = "hugo-foxx"
-paginate = 10
+languageCode = "en-us"
+title = "Rat Labs"
+theme = "ratlabs"
+
+# Enable features
 enableRobotsTXT = true
+enableGitInfo = true
 
-[taxonomies]
-  tag = "tags"
-  category = "categories"
-  author = "author"
+# Pagination
+[pagination]
+  pagerSize = 10
+  path = "page"
 
-[params]
-  description = "Independent research collective. Curiosity-driven. Skepticism-fueled."
-  enableAppearance = true
-
-  [params.logo]
-    logoMark = "/logo.png"
-    logoType = false
-
-  [params.author]
-    name = "RatLabsCorp"
-
-  [params.style]
-    [params.style.dark]
-      ac = "#d4a574"
-      bg = "#0d1117"
-      fg = "#c9d1d9"
-    [params.style.light]
-      ac = "#8b5e14"
-      bg = "#f6f3ee"
-      fg = "#1a1a1a"
-
-  [params.posts]
-    disableCard = false
-
+# Syntax highlighting via Chroma (no external JS)
 [markup]
+  [markup.highlight]
+    style = "monokailight"
+    lineNos = false
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-    [markup.goldmark.extensions]
-      [markup.goldmark.extensions.passthrough]
-        enable = true
-        [markup.goldmark.extensions.passthrough.delimiters]
-          block = [["$$", "$$"]]
-          inline = [["$", "$"]]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
 
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
+# Output formats — RSS + HTML for all sections
 [outputs]
   home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+# Main navigation menu
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 3
+  [[menu.main]]
+    name = "Members"
+    url = "/members/"
+    weight = 4
+  [[menu.main]]
+    name = "Reading"
+    url = "/reading/"
+    weight = 5
+  [[menu.main]]
+    name = "Manifesto"
+    url = "/manifesto/"
+    weight = 6
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 7
+
+# Site parameters
+[params]
+  description = "Independent research in software, computing systems, and artificial intelligence."
+  tagline = "Don't be a rat."
+  author = "Rat Labs"
+  github = "https://github.com/ratlabscorp"
+  email = "hello@ratlabs.org"
+  # OpenGraph image
+  ogImage = "/images/og-default.png"
+  # Enable dark mode toggle
+  darkMode = true
+  # Reading list categories (order matters for display)
+  readingCategories = [
+    "Systems",
+    "Programming Languages",
+    "Operating Systems",
+    "AI",
+    "Machine Learning",
+    "Distributed Systems",
+    "Security",
+    "Mathematics"
+  ]

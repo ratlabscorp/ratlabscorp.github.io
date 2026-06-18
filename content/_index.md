@@ -1,9 +1,5 @@
 ---
-title: "RatLabsCorp"
+title: "Home"
 ---
 
-## Independent Research Collective
-
-*"Don't be a rat."*
-
-We follow questions, not funding. We publish everything — especially failures.
+Rat Labs is an independent research collective focused on the intersection of software systems, programming language theory, and machine intelligence. We are not affiliated with any university or corporation. We publish our findings openly.

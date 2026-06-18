@@ -1,0 +1,18 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-copy">
+      &copy; {{ now.Year }} {{ .Site.Title }}.
+      Built with <a href="https://gohugo.io" rel="noopener noreferrer" target="_blank">Hugo</a>.
+    </p>
+    <ul class="footer-links" role="list">
+      {{ with .Site.Params.github }}
+      <li><a href="{{ . }}" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+      {{ end }}
+      {{ with .Site.Params.email }}
+      <li><a href="mailto:{{ . }}">Email</a></li>
+      {{ end }}
+      <li><a href="{{ "/index.xml" | relURL }}">RSS</a></li>
+      <li><a href="{{ "/sitemap.xml" | relURL }}">Sitemap</a></li>
+    </ul>
+  </div>
+</footer>

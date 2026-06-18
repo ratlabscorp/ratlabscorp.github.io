@@ -1,5 +1,41 @@
+# Hugo build output
 public/
-resources/
+resources/_gen/
+
+# Hugo cache
 .hugo_build.lock
+.cache/
+
+# Hugo module downloads (if using Hugo Modules)
+/go.sum
+/go.work
+/go.work.sum
+
+# OS-specific
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.env
+.envrc
+
+# Node (only if you add npm tooling later)
 node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.bak
+*.log

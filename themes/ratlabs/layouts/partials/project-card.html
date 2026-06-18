@@ -1,0 +1,30 @@
+{{/* partials/project-card.html — shared project card body */}}
+<div class="project-card__header">
+  <h2 class="project-card__title">
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </h2>
+  {{ with .Params.status }}
+  <span class="status-badge status-badge--{{ lower . | urlize }}">{{ . }}</span>
+  {{ end }}
+</div>
+{{ with .Params.description }}
+<p class="project-card__description">{{ . }}</p>
+{{ end }}
+<div class="project-card__footer">
+  {{ with .Params.contributors }}
+  <span class="project-card__contributors">
+    {{ delimit . " · " }}
+  </span>
+  {{ end }}
+  {{ with .Params.links }}
+  <ul class="project-card__links" role="list">
+    {{ range . }}
+    <li>
+      <a href="{{ .url }}" class="project-card__link" rel="noopener noreferrer" target="_blank">
+        {{ .label }} ↗
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</div>

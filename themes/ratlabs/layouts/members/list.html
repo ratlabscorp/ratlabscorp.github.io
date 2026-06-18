@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div class="container">
+
+  <header class="page-header">
+    <p class="page-header__label">people</p>
+    <h1 class="page-header__title">Members</h1>
+    <p class="page-header__subtitle">The researchers behind Rat Labs.</p>
+  </header>
+
+  <ul class="members-grid" role="list">
+    {{ range .Pages }}
+    <li class="member-card">
+      <h2 class="member-card__name">{{ .Title }}</h2>
+      {{ with .Params.bio }}
+      <p class="member-card__bio">{{ . }}</p>
+      {{ end }}
+      {{ with .Params.interests }}
+      <ul class="member-card__interests" role="list" aria-label="Areas of interest">
+        {{ range . }}
+        <li><span class="tag">{{ . }}</span></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+      {{ with .Params.links }}
+      <ul class="member-card__links" role="list">
+        {{ range . }}
+        <li>
+          <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
+            {{ .label }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+
+</div>
+{{ end }}

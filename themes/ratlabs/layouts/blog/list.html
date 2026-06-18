@@ -1,0 +1,70 @@
+{{ define "main" }}
+<div class="container">
+
+  <header class="page-header">
+    <p class="page-header__label">notes</p>
+    <h1 class="page-header__title">Blog</h1>
+    <p class="page-header__subtitle">Research writing, technical notes, and field observations.</p>
+  </header>
+
+  {{/* Tag filter row */}}
+  {{ $allTags := .Site.Taxonomies.tags }}
+  {{ if $allTags }}
+  <nav aria-label="Filter by tag" style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {{ range $allTags.ByCount }}
+    <a href="{{ "/tags/" | relURL }}{{ .Page.Title | urlize }}/" class="tag">
+      {{ .Page.Title }} <span style="color: var(--fg-faint);">({{ .Count }})</span>
+    </a>
+    {{ end }}
+  </nav>
+  {{ end }}
+
+  {{/* Post list */}}
+  <ul class="card-list" role="list">
+    {{ range .Paginator.Pages }}
+    <li class="card">
+      <div class="card__meta">
+        <time class="card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "02 Jan 2006" }}
+        </time>
+        {{ if .ReadingTime }}
+        <span class="card__date">{{ .ReadingTime }} min read</span>
+        {{ end }}
+        {{ with .Params.series }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+      <h2 class="card__title">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </h2>
+      {{ with .Summary }}
+      <p class="card__excerpt">{{ . }}</p>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="card__footer">
+        {{ range . }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+
+  {{/* Pagination */}}
+  {{ if gt .Paginator.TotalPages 1 }}
+  <nav class="pagination" aria-label="Blog navigation">
+    {{ if .Paginator.HasPrev }}
+    <a class="pagination__link" href="{{ .Paginator.Prev.URL }}">← newer</a>
+    {{ else }}
+    <span></span>
+    {{ end }}
+    <span class="pagination__info">page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+    {{ if .Paginator.HasNext }}
+    <a class="pagination__link" href="{{ .Paginator.Next.URL }}">older →</a>
+    {{ end }}
+  </nav>
+  {{ end }}
+
+</div>
+{{ end }}

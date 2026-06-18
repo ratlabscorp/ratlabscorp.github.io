@@ -1,0 +1,39 @@
+<header class="site-header" role="banner">
+  <div class="header-inner">
+
+    {{/* Wordmark */}}
+    <a href="{{ "/" | relURL }}" class="site-wordmark" aria-label="{{ .Site.Title }} home">
+      <span class="site-wordmark__name">{{ .Site.Title }}</span>
+      <span class="site-wordmark__glyph" aria-hidden="true">// research</span>
+    </a>
+
+    {{/* Mobile hamburger */}}
+    <button class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation">
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+    </button>
+
+    {{/* Main navigation */}}
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <ul class="site-nav__list" role="list">
+        {{ range .Site.Menus.main }}
+        <li class="site-nav__item">
+          <a href="{{ .URL | relURL }}"
+             {{ if eq $.RelPermalink (.URL | relURL) }}class="active" aria-current="page"{{ end }}>
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    {{/* Dark mode toggle */}}
+    {{ if .Site.Params.darkMode }}
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__icon" aria-hidden="true">dark</span>
+    </button>
+    {{ end }}
+
+  </div>
+</header>

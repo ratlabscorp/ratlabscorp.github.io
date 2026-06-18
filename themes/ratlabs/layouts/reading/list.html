@@ -1,0 +1,91 @@
+{{ define "main" }}
+<div class="container">
+
+  <header class="page-header">
+    <p class="page-header__label">library</p>
+    <h1 class="page-header__title">Reading</h1>
+    <p class="page-header__subtitle">
+      A curated bookshelf. Things we've read, are reading, or think you should read.
+    </p>
+  </header>
+
+  {{/* Group reading items by category, using the configured category order */}}
+  {{ $allReadingPages := .Pages }}
+  {{ $categories := .Site.Params.readingCategories }}
+
+  {{/* If no custom order, fall back to all unique categories from pages */}}
+  {{ if not $categories }}
+    {{ $cats := slice }}
+    {{ range $allReadingPages }}
+      {{ with .Params.category }}
+        {{ $cats = $cats | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $categories = $cats | uniq }}
+  {{ end }}
+
+  {{ range $categories }}
+  {{ $cat := . }}
+  {{ $items := where $allReadingPages "Params.category" $cat }}
+  {{ if $items }}
+  <section class="reading-category" aria-labelledby="cat-{{ $cat | urlize }}">
+    <h2 class="reading-category__title" id="cat-{{ $cat | urlize }}">{{ $cat }}</h2>
+    <ul class="reading-list" role="list">
+      {{ range $items }}
+      <li class="reading-item">
+        <div>
+          <p class="reading-item__title">
+            {{ with .Params.link }}
+            <a href="{{ . }}" rel="noopener noreferrer" target="_blank">{{ $.Title }}</a>
+            {{ else }}
+            {{ .Title }}
+            {{ end }}
+          </p>
+          {{ with .Params.author }}
+          <p class="reading-item__author">{{ . }}</p>
+          {{ end }}
+          {{ with .Params.note }}
+          <p class="reading-item__note">{{ . }}</p>
+          {{ end }}
+        </div>
+        {{ with .Params.status }}
+        <span class="reading-item__status">{{ . }}</span>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+  {{ end }}
+
+  {{/* Items with no matching category (safety net) */}}
+  {{ $uncategorized := where $allReadingPages "Params.category" nil }}
+  {{ if $uncategorized }}
+  <section class="reading-category" aria-labelledby="cat-misc">
+    <h2 class="reading-category__title" id="cat-misc">miscellaneous</h2>
+    <ul class="reading-list" role="list">
+      {{ range $uncategorized }}
+      <li class="reading-item">
+        <div>
+          <p class="reading-item__title">
+            {{ with .Params.link }}
+            <a href="{{ . }}" rel="noopener noreferrer" target="_blank">{{ $.Title }}</a>
+            {{ else }}
+            {{ .Title }}
+            {{ end }}
+          </p>
+          {{ with .Params.author }}
+          <p class="reading-item__author">{{ . }}</p>
+          {{ end }}
+        </div>
+        {{ with .Params.status }}
+        <span class="reading-item__status">{{ . }}</span>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

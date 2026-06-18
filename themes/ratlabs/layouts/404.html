@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="container">
+  <div class="not-found">
+    <span class="not-found__code" aria-hidden="true">404</span>
+    <p class="not-found__message">Page not found.</p>
+    <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg-faint); margin-bottom: 2rem;">
+      This path doesn't exist. It may have moved or been removed.
+    </p>
+    <a href="{{ "/" | relURL }}" style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--accent); text-decoration: underline;">
+      ← Back to home
+    </a>
+  </div>
+</div>
+{{ end }}

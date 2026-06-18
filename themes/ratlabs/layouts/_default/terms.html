@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="container">
+
+  <header class="page-header">
+    <p class="page-header__label">{{ .Data.Plural }}</p>
+    <h1 class="page-header__title">{{ .Title | title }}</h1>
+  </header>
+
+  <ul class="taxonomy-list" role="list">
+    {{ range .Data.Terms.Alphabetical }}
+    <li class="taxonomy-list__item">
+      <a href="{{ .Page.Permalink }}">
+        {{ .Page.Title }}
+        <span class="taxonomy-list__count">({{ .Count }})</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+
+</div>
+{{ end }}
