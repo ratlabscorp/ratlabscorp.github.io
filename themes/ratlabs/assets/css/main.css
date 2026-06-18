@@ -11,6 +11,14 @@
    -------------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap');
 
+@font-face {
+  font-family: 'LogoFont';
+  src: url('/fonts/JMH_Typewriter.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --------------------------------------------------------------------------
    Design Tokens (CSS Custom Properties)
    -------------------------------------------------------------------------- */
@@ -262,9 +270,13 @@ button:focus-visible {
 }
 
 .site-logo__wordmark {
-  height: 18px; /* scaled relative to 32px logo */
-  object-fit: contain;
+  font-family: 'LogoFont', var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: 1;
+  color: var(--fg);
   display: block;
+  user-select: none;
+  transform: translateY(1px); /* Slight baseline tweak to align with 32px logo and pipe */
 }
 
 /* Main nav */
@@ -1164,7 +1176,7 @@ a {
 .member-card__avatar-wrap {
   position: absolute;
   top: -20px;
-  right: var(--space-5);
+  right: var(--space-6);
 }
 
 /* Avatar image or initials circle */
