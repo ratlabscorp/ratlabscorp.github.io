@@ -7,13 +7,13 @@
     <p class="page-header__subtitle">Browse projects by topic.</p>
   </header>
 
-  <ul class="project-filter__list" role="list" style="margin-top: var(--space-8);">
+  <ul class="topic-filter__list" role="list" style="margin-top: var(--space-8);">
     {{ range $name, $pages := .Site.Taxonomies.project_tags }}
     <li>
       <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
-         class="project-filter__tag">
+         class="topic-filter__tag">
         {{ $name }}
-        <span class="project-filter__count">{{ len $pages }}</span>
+        <span class="topic-filter__count">{{ len $pages }}</span>
       </a>
     </li>
     {{ end }}

@@ -1,19 +1,13 @@
 <header class="site-header" role="banner">
   <div class="header-inner">
 
-    {{/* ── Left cluster: Logo + Signature phrase ── */}}
+    {{/* ── Left cluster: Logo + Wordmark ── */}}
     <div class="header-left">
       <a href="{{ "/" | relURL }}" class="site-logo" aria-label="{{ .Site.Title }} home">
         <img src="{{ "/logo.png" | relURL }}" alt="{{ .Site.Title }}" class="site-logo__img">
+        <span class="site-logo__divider" aria-hidden="true">|</span>
+        <img src="{{ "/typg.png" | relURL }}" alt="{{ .Site.Title }} Wordmark" class="site-logo__wordmark">
       </a>
-
-      {{/* "Don't be a rat." — site's signature phrase, links to manifesto */}}
-      {{ $manifesto := .Site.GetPage "/manifesto" }}
-      {{ if $manifesto }}
-      <a href="{{ $manifesto.Permalink }}" class="site-tagline" title="Read the manifesto">
-        &ldquo;{{ .Site.Params.tagline }}&rdquo;
-      </a>
-      {{ end }}
     </div>
 
     {{/* Mobile hamburger */}}
@@ -28,15 +22,12 @@
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
         <ul class="site-nav__list" role="list">
           {{ range .Site.Menus.main }}
-          {{/* Manifesto is accessible via the signature phrase — exclude from main nav */}}
-          {{ if ne .Name "Manifesto" }}
           <li class="site-nav__item">
             <a href="{{ .URL | relURL }}"
                {{ if eq $.RelPermalink (.URL | relURL) }}class="active" aria-current="page"{{ end }}>
               {{ .Name | lower }}
             </a>
           </li>
-          {{ end }}
           {{ end }}
         </ul>
       </nav>

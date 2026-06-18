@@ -10,15 +10,15 @@
   {{/* ── Tag filter pills ── */}}
   {{ $allTags := .Site.Taxonomies.project_tags }}
   {{ if $allTags }}
-  <nav class="project-filter" aria-label="Filter projects by topic">
-    <p class="project-filter__label">filter by topic</p>
-    <ul class="project-filter__list" role="list">
+  <nav class="topic-filter" aria-label="Filter projects by topic">
+    <p class="topic-filter__label">filter by topic</p>
+    <ul class="topic-filter__list" role="list">
       {{ range $name, $pages := $allTags }}
       <li>
         <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
-           class="project-filter__tag">
+           class="topic-filter__tag">
           {{ $name }}
-          <span class="project-filter__count">{{ len $pages }}</span>
+          <span class="topic-filter__count">{{ len $pages }}</span>
         </a>
       </li>
       {{ end }}

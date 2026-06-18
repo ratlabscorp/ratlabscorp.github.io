@@ -29,7 +29,10 @@
   {{ $items := where $allReadingPages "Params.category" $cat }}
   {{ if $items }}
   <section class="reading-category" aria-labelledby="cat-{{ $cat | urlize }}">
-    <h2 class="reading-category__title" id="cat-{{ $cat | urlize }}">{{ $cat }}</h2>
+    <div class="reading-category__header">
+      <h2 class="reading-category__title" id="cat-{{ $cat | urlize }}">{{ $cat }}</h2>
+      <span class="reading-category__count">{{ len $items }} items</span>
+    </div>
     <ul class="reading-list" role="list">
       {{ range $items }}
       <li class="reading-item">
@@ -62,7 +65,10 @@
   {{ $uncategorized := where $allReadingPages "Params.category" nil }}
   {{ if $uncategorized }}
   <section class="reading-category" aria-labelledby="cat-misc">
-    <h2 class="reading-category__title" id="cat-misc">miscellaneous</h2>
+    <div class="reading-category__header">
+      <h2 class="reading-category__title" id="cat-misc">miscellaneous</h2>
+      <span class="reading-category__count">{{ len $uncategorized }} items</span>
+    </div>
     <ul class="reading-list" role="list">
       {{ range $uncategorized }}
       <li class="reading-item">

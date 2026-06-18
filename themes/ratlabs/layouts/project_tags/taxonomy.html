@@ -20,14 +20,14 @@
   {{/* All other tags for cross-navigation */}}
   {{ $allTags := .Site.Taxonomies.project_tags }}
   {{ if $allTags }}
-  <nav class="project-filter" aria-label="Other project topics" style="margin-bottom: var(--space-8);">
-    <ul class="project-filter__list" role="list">
+  <nav class="topic-filter" aria-label="Other project topics" style="margin-bottom: var(--space-8);">
+    <ul class="topic-filter__list" role="list">
       {{ range $name, $pages := $allTags }}
       <li>
         <a href="{{ "/project_tags/" | relURL }}{{ $name | urlize }}/"
-           class="project-filter__tag{{ if eq $name ($.Title | lower | urlize) }} project-filter__tag--active{{ end }}">
+           class="topic-filter__tag{{ if eq $name ($.Title | lower | urlize) }} topic-filter__tag--active{{ end }}">
           {{ $name }}
-          <span class="project-filter__count">{{ len $pages }}</span>
+          <span class="topic-filter__count">{{ len $pages }}</span>
         </a>
       </li>
       {{ end }}

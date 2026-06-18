@@ -241,6 +241,7 @@ button:focus-visible {
 .site-logo {
   display: flex;
   align-items: center;
+  gap: var(--space-3);
   flex-shrink: 0;
   text-decoration: none;
 }
@@ -252,20 +253,18 @@ button:focus-visible {
   display: block;
 }
 
-/* Manifesto — pinned brand pillar link */
-.site-tagline {
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-style: italic;
-  color: var(--fg-muted);
-  text-decoration: none;
-  letter-spacing: 0;
-  white-space: nowrap;
-  transition: color var(--transition);
+.site-logo__divider {
+  color: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 300;
+  user-select: none;
 }
 
-.site-tagline:hover {
-  color: var(--fg);
+.site-logo__wordmark {
+  height: 18px; /* scaled relative to 32px logo */
+  object-fit: contain;
+  display: block;
 }
 
 /* Main nav */
@@ -979,13 +978,13 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Project filter — tag pills at top of projects list
+   Topic Filter — Shared tag pills for blog and projects
    -------------------------------------------------------------------------- */
-.project-filter {
+.topic-filter {
   margin-bottom: var(--space-8);
 }
 
-.project-filter__label {
+.topic-filter__label {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--fg-faint);
@@ -994,7 +993,7 @@ a {
   margin-bottom: var(--space-3);
 }
 
-.project-filter__list {
+.topic-filter__list {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
@@ -1002,7 +1001,7 @@ a {
   padding: 0;
 }
 
-.project-filter__tag {
+.topic-filter__tag {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -1018,18 +1017,18 @@ a {
   transition: border-color var(--transition), color var(--transition), background-color var(--transition);
 }
 
-.project-filter__tag:hover {
+.topic-filter__tag:hover {
   color: var(--fg);
   border-color: var(--border-focus);
 }
 
-.project-filter__tag--active {
+.topic-filter__tag--active {
   color: var(--accent);
   background-color: var(--accent-dim);
   border-color: transparent;
 }
 
-.project-filter__count {
+.topic-filter__count {
   font-size: var(--text-xs);
   color: var(--fg-faint);
   background-color: var(--bg);
@@ -1256,16 +1255,37 @@ a {
   margin-bottom: var(--space-12);
 }
 
-.reading-category__title {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  color: var(--fg-muted);
+.reading-category__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   margin-bottom: var(--space-4);
-  padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--border);
+}
+
+.reading-category__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.reading-category__title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--border-focus);
+}
+
+.reading-category__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-faint);
+  letter-spacing: 0.08em;
 }
 
 .reading-list {
@@ -1552,41 +1572,6 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Taxonomy (tags, categories) List
-   -------------------------------------------------------------------------- */
-.taxonomy-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.taxonomy-list__item a {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
-  text-decoration: none;
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  transition: border-color var(--transition), color var(--transition);
-}
-
-.taxonomy-list__item a:hover {
-  color: var(--fg);
-  border-color: var(--border-focus);
-}
-
-.taxonomy-list__count {
-  font-size: var(--text-xs);
-  color: var(--fg-faint);
-}
-
-/* --------------------------------------------------------------------------
    404 Page
    -------------------------------------------------------------------------- */
 .not-found {
@@ -1659,8 +1644,8 @@ a {
     align-items: flex-start;
   }
 
-  /* On mobile: hide the site tagline to save header space */
-  .site-tagline {
+  .site-logo__wordmark,
+  .site-logo__divider {
     display: none;
   }
 

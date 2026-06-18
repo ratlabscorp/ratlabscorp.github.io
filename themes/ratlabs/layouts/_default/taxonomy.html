@@ -18,14 +18,15 @@
           {{ .Date.Format "02 Jan 2006" }}
         </time>
         {{ if .ReadingTime }}
-        <span class="card__date">{{ .ReadingTime }} min read</span>
+        <span class="card__reading-time">{{ .ReadingTime }} min read</span>
         {{ end }}
       </div>
       <h2 class="card__title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h2>
+      {{/* One-line excerpt: strip HTML, truncate at 120 chars for scannability */}}
       {{ with .Summary }}
-      <p class="card__excerpt">{{ . }}</p>
+      <p class="card__excerpt">{{ . | plainify | truncate 120 }}</p>
       {{ end }}
     </li>
     {{ end }}

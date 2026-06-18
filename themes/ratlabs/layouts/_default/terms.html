@@ -6,12 +6,12 @@
     <h1 class="page-header__title">{{ .Title | title }}</h1>
   </header>
 
-  <ul class="taxonomy-list" role="list">
+  <ul class="topic-filter__list" role="list" style="margin-top: var(--space-8);">
     {{ range .Data.Terms.Alphabetical }}
-    <li class="taxonomy-list__item">
-      <a href="{{ .Page.Permalink }}">
+    <li>
+      <a href="{{ .Page.Permalink }}" class="topic-filter__tag">
         {{ .Page.Title }}
-        <span class="taxonomy-list__count">({{ .Count }})</span>
+        <span class="topic-filter__count">{{ .Count }}</span>
       </a>
     </li>
     {{ end }}
