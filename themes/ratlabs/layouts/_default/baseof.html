@@ -45,6 +45,13 @@
   {{/* Favicon — simple SVG inline */}}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐀</text></svg>">
 
+  {{/* Google Fonts — preconnect first to avoid extra DNS/TLS round-trips,
+       then the stylesheet as a <link> rather than a CSS @import so the browser
+       can fetch both the CSS pipeline and the fonts in parallel. */}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap">
+
   {{/* Syntax highlighting CSS (Chroma) */}}
   {{ $syntaxCSS := resources.Get "css/syntax.css" }}
   {{ if $syntaxCSS }}
@@ -122,6 +129,8 @@
       });
     })();
   </script>
+
+  {{ partial "analytics.html" . }}
 
 </body>
 </html>

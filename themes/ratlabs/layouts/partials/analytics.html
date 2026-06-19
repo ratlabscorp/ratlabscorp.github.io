@@ -1,0 +1,10 @@
+{{- /* analytics.html — GoatCounter integration
+     Only loads in production to prevent dev traffic polluting analytics data.
+     GoatCounter is cookieless and fully GDPR-compliant out of the box.
+     The async attribute ensures the script never blocks the main thread.
+     The script itself is under 3KB with no layout impact.
+*/ -}}
+{{ if hugo.IsProduction }}
+<script data-goatcounter="https://rat-labs.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+{{ end }}

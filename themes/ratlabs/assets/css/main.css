@@ -9,7 +9,8 @@
    Google Fonts: Source Serif 4 (body), Libre Baskerville (headings),
                  JetBrains Mono (code/ui)
    -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap');
+
+
 
 @font-face {
   font-family: 'LogoFont';
@@ -519,28 +520,28 @@ button:focus-visible {
    Homepage Hero
    -------------------------------------------------------------------------- */
 .home-hero {
-  padding-block: var(--space-16) var(--space-12);
+  padding-block: var(--space-12) var(--space-10);
 }
 
 /* "Rat Labs" — primary identity mark */
 .home-hero__name {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.05;
   color: var(--fg);
-  /* Signature element: three hairline rules beneath the name */
+  /* Signature element: two hairline rules beneath the name */
   padding-bottom: var(--space-4);
-  border-bottom: 3px solid var(--fg);
-  box-shadow: 0 3px 0 var(--border), 0 6px 0 var(--border);
-  margin-bottom: var(--space-10);
+  border-bottom: 2px solid var(--fg);
+  box-shadow: 0 2px 0 var(--border), 0 4px 0 var(--border);
+  margin-bottom: var(--space-8);
   display: inline-block;
 }
 
 .home-hero__tagline {
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-style: italic;
   color: var(--fg-muted);
   margin-bottom: var(--space-6);
