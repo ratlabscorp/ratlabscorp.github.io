@@ -9,41 +9,29 @@
     {{ end }}
   </header>
 
-  <ul class="members-grid" role="list">
+  <ul class="project-cards-grid" role="list">
     {{ range .Pages }}
-    <li class="member-card">
-      {{/* Avatar — overflowing circle at top-right */}}
-      <div class="member-card__avatar-wrap" aria-hidden="true">
-        {{ if .Params.avatar }}
-        <img src="{{ .Params.avatar | relURL }}" alt="" class="member-card__avatar">
-        {{ else }}
-        <span class="member-card__avatar member-card__avatar--initials">
-          {{ substr .Title 0 1 | upper }}
-        </span>
-        {{ end }}
-      </div>
-      <div class="member-card__body">
-        <h2 class="member-card__name">
+    <li class="project-card project-card--boxed">
+      <div class="project-card__header">
+        <h2 class="project-card__title">
           <a href="{{ .Permalink }}">{{ .Title }}</a>
         </h2>
-        {{ with .Params.bio }}
-        <p class="member-card__bio">{{ . }}</p>
-        {{ end }}
+      </div>
+      {{ with .Params.bio }}
+      <p class="project-card__description">{{ . }}</p>
+      {{ end }}
+      <div class="project-card__footer">
         {{ with .Params.interests }}
-        <ul class="member-card__interests" role="list" aria-label="Areas of interest">
+        <ul class="project-card__tags" role="list" aria-label="Areas of interest">
           {{ range . }}
           <li><span class="tag">{{ . }}</span></li>
           {{ end }}
         </ul>
         {{ end }}
         {{ with .Params.links }}
-        <ul class="member-card__links" role="list">
+        <ul class="project-card__links" role="list">
           {{ range . }}
-          <li>
-            <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
-              {{ .label }}
-            </a>
-          </li>
+          <li><a href="{{ .url }}" class="project-card__link" rel="noopener noreferrer" target="_blank">{{ .label }} ↗</a></li>
           {{ end }}
         </ul>
         {{ end }}

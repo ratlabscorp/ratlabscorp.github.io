@@ -92,31 +92,33 @@
   {{ if $members }}
   <section class="home-section" aria-labelledby="members-heading">
     <p class="section-label" id="members-heading">members</p>
-    <ul class="members-grid" role="list">
+    <ul class="project-cards-grid" role="list">
       {{ range $members }}
-      <li class="member-card">
-        <h2 class="member-card__name">{{ .Title }}</h2>
+      <li class="project-card project-card--boxed">
+        <div class="project-card__header">
+          <h2 class="project-card__title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h2>
+        </div>
         {{ with .Params.bio }}
-        <p class="member-card__bio">{{ . }}</p>
+        <p class="project-card__description">{{ . }}</p>
         {{ end }}
-        {{ with .Params.interests }}
-        <ul class="member-card__interests" role="list">
-          {{ range . }}
-          <li><span class="tag">{{ . }}</span></li>
+        <div class="project-card__footer">
+          {{ with .Params.interests }}
+          <ul class="project-card__tags" role="list" aria-label="Areas of interest">
+            {{ range . }}
+            <li><span class="tag">{{ . }}</span></li>
+            {{ end }}
+          </ul>
           {{ end }}
-        </ul>
-        {{ end }}
-        {{ with .Params.links }}
-        <ul class="member-card__links" role="list">
-          {{ range . }}
-          <li>
-            <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
-              {{ .label }} ↗
-            </a>
-          </li>
+          {{ with .Params.links }}
+          <ul class="project-card__links" role="list">
+            {{ range . }}
+            <li><a href="{{ .url }}" class="project-card__link" rel="noopener noreferrer" target="_blank">{{ .label }} ↗</a></li>
+            {{ end }}
+          </ul>
           {{ end }}
-        </ul>
-        {{ end }}
+        </div>
       </li>
       {{ end }}
     </ul>
