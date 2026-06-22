@@ -60,6 +60,10 @@ enableGitInfo = true
     name = "Manifesto"
     url = "/manifesto/"
     weight = 4
+  [[menu.main]]
+    name = "Members"
+    url = "/members/"
+    weight = 5
 
 # Site parameters
 [params]

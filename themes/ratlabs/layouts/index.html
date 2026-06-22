@@ -87,6 +87,45 @@
   </section>
   {{ end }}
 
+  {{/* ── Members ── */}}
+  {{ $members := where site.RegularPages "Section" "members" }}
+  {{ if $members }}
+  <section class="home-section" aria-labelledby="members-heading">
+    <p class="section-label" id="members-heading">members</p>
+    <ul class="members-grid" role="list">
+      {{ range $members }}
+      <li class="member-card">
+        <h2 class="member-card__name">{{ .Title }}</h2>
+        {{ with .Params.bio }}
+        <p class="member-card__bio">{{ . }}</p>
+        {{ end }}
+        {{ with .Params.interests }}
+        <ul class="member-card__interests" role="list">
+          {{ range . }}
+          <li><span class="tag">{{ . }}</span></li>
+          {{ end }}
+        </ul>
+        {{ end }}
+        {{ with .Params.links }}
+        <ul class="member-card__links" role="list">
+          {{ range . }}
+          <li>
+            <a href="{{ .url }}" class="member-card__link" rel="noopener noreferrer" target="_blank">
+              {{ .label }} ↗
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+    <p class="section-more">
+      <a href="{{ "/members/" | relURL }}">All members &rarr;</a>
+    </p>
+  </section>
+  {{ end }}
+
   {{/* ── Collaborate ── */}}
   <section class="home-section" aria-labelledby="involved-heading">
     <p class="section-label" id="involved-heading">collaborate</p>
